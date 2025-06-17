@@ -1,25 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Upload Image</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-    }
-    #image-preview {
-      width: 200px;
-      height: 200px;
-      border: 1px solid #ccc;
-      padding: 10px;
-    }
-  </style>
+  <meta charset="UTF-8">
+  <title>Image Uploader</title>
 </head>
 <body>
-  <h1>Upload Image</h1>
-  <input type="file" id="image-input" accept="image/*" />
-  <div id="image-preview"></div>
-  <button id="upload-button">Upload</button>
-
-  <script src="script.js"></script>
+  <h2>Upload an Image</h2>
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="image" accept="image/*" required>
+    <button type="submit">Upload</button>
+  </form>
+  <div id="result"></div>
+  <script>
+    document.getElementById('uploadForm').onsubmit = async function(e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+      const res = await fetch('/upload', { method: 'POST', body: formData });
+      const data = await res.json();
+      if (data.url) {
+        document.getElementById('result').innerHTML = `<a href="${data.url}" target="_blank">Uploaded Image Link</a>`;
+      } else {
+        document.getElementById('result').innerText = 'Upload failed: ' + (data.error || 'Unknown error');
+      }
+    };
+  </script>
 </body>
 </html>
