@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Web Uploader</title>
+  <title>Upload Image</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    #image-preview {
+      width: 200px;
+      height: 200px;
+      border: 1px solid #ccc;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Web Uploader</h1>
-  <form id="upload-form">
-    <input type="file" id="file-input" />
-    <button id="upload-button">Upload</button>
-  </form>
-  <div id="upload-status"></div>
+  <h1>Upload Image</h1>
+  <input type="file" id="image-input" accept="image/*" />
+  <div id="image-preview"></div>
+  <button id="upload-button">Upload</button>
 
   <script src="script.js"></script>
 </body>
