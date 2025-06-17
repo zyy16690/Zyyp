@@ -1,9 +1,19 @@
-const fileInput = document.getElementById('file-input');
+const imageInput = document.getElementById('image-input');
+const imagePreview = document.getElementById('image-preview');
 const uploadButton = document.getElementById('upload-button');
-const uploadStatus = document.getElementById('upload-status');
+
+imageInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = () => {
+    const imageDataURL = reader.result;
+    imagePreview.innerHTML = `<img src="${imageDataURL}" width="200" height="200" />`;
+  };
+  reader.readAsDataURL(file);
+});
 
 uploadButton.addEventListener('click', () => {
-  const file = fileInput.files[0];
+  const file = imageInput.files[0];
   // Kode untuk mengupload file ke server atau API
   // Contoh menggunakan fetch API
   fetch('/upload', {
@@ -12,9 +22,9 @@ uploadButton.addEventListener('click', () => {
   })
     .then((response) => response.json())
     .then((data) => {
-      uploadStatus.textContent = 'Upload berhasil!';
+      console.log('Upload berhasil!');
     })
     .catch((error) => {
-      uploadStatus.textContent = 'Upload gagal!';
+      console.error('Upload gagal!');
     });
 });
