@@ -1,10 +1,8 @@
-const uploadForm = document.getElementById('upload-form');
 const fileInput = document.getElementById('file-input');
 const uploadButton = document.getElementById('upload-button');
 const uploadStatus = document.getElementById('upload-status');
 
-uploadButton.addEventListener('click', (e) => {
-  e.preventDefault();
+uploadButton.addEventListener('click', () => {
   const file = fileInput.files[0];
   // Kode untuk mengupload file ke server atau API
   // Contoh menggunakan fetch API
